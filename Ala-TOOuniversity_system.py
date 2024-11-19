@@ -120,3 +120,4 @@ else:
         print(f" {First_Name} {Last_Name}, we congratulate you! You have been admitted to the {selected_specialty} "
               f"program at Ala-Too International University. The cost of your tuition will be {base_cost}$ per year.")
 # I have already done this projcet so it is only for commit
+# I see you 
