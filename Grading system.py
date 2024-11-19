@@ -47,3 +47,4 @@ if total_grades > 0:
 else:
     print("No  grades entered.")
     # I have already done this projcet so it is only for commit
+    # it is last my commit 
