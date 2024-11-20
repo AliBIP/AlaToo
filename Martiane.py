@@ -34,8 +34,6 @@ while True:
         print(f"Previous guess: {guesses}, Correct locations were: {box_locations}")
         box_locations = random_boxes()  
 
-    # I have already done this projcet so it is only for commit
-    # Hello 
-    #Bla bla bla 
+
     
     
