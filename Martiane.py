@@ -1,4 +1,4 @@
-
+import random
 
 def random_boxes():
     return [random.randint(1, 10), random.randint(1, 10), random.randint(1, 10)]
