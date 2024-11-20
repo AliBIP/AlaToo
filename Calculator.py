@@ -39,7 +39,5 @@ else:
     print("You don't follow instruction donkey")
 
 
-# I have already done this projcet so it is only for commit
-# I love game bro 
 # 2
 
