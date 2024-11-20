@@ -1,4 +1,4 @@
-import random
+
 
 def random_boxes():
     return [random.randint(1, 10), random.randint(1, 10), random.randint(1, 10)]
@@ -34,6 +34,6 @@ while True:
         print(f"Previous guess: {guesses}, Correct locations were: {box_locations}")
         box_locations = random_boxes()  
 
-
+#vncx,vnx,zcvn,xcv
     
     
