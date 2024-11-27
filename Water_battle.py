@@ -10,21 +10,64 @@ player_name = input("Enter your name: ")
 
 sizes = [3, 2, 2, 1, 1, 1, 1]
 
+def can_place_ship(row, col, size, direction, field):
+    if direction == 'H':
+        if col + size > 7:
+            return False
+        for i in range(size):
+            if field[row][col + i] != '.':
+                return False
+            for dr in [-1, 0, 1]:
+                for dc in [-1, 0, 1]:
+                    nr, nc = row + dr, col + i + dc
+                    if 0 <= nr < 7 and 0 <= nc < 7 and field[nr][nc] == 'S':
+                        return False
+    elif direction == 'V':
+        if row + size > 7:
+            return False
+        for i in range(size):
+            if field[row + i][col] != '.':
+                return False
+            for dr in [-1, 0, 1]:
+                for dc in [-1, 0, 1]:
+                    nr, nc = row + i + dr, col + dc
+                    if 0 <= nr < 7 and 0 <= nc < 7 and field[nr][nc] == 'S':
+                        return False
+    return True
+
+def is_ship_sunk(row, col, field, display_field):
+    ship_cells = [(row, col)]
+    visited = set()
+
+    while ship_cells:
+        r, c = ship_cells.pop()
+        visited.add((r, c))
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < 7 and 0 <= nc < 7 and (nr, nc) not in visited:
+                if field[nr][nc] == 'S':
+                    return False  
+                if display_field[nr][nc] == 'X':
+                    ship_cells.append((nr, nc))
+
+    for r, c in visited:
+        display_field[r][c] = 'S'
+    return True
+
+
 for size in sizes:
     while True:
         direction = random.choice(['H', 'V'])
         row = random.randint(0, 6)
         col = random.randint(0, 6)
-        if direction == 'H' and col + size <= 7:
-            if all(field[row][col + i] == '.' for i in range(size)):
+        if can_place_ship(row, col, size, direction, field):
+            if direction == 'H':
                 for i in range(size):
                     field[row][col + i] = 'S'
-                break
-        elif direction == 'V' and row + size <= 7:
-            if all(field[row + i][col] == '.' for i in range(size)):
+            elif direction == 'V':
                 for i in range(size):
                     field[row + i][col] = 'S'
-                break
+            break
 
 shots = 0
 while True:
@@ -36,7 +79,7 @@ while True:
     print("\nEnter your shot (e.g., A 4) or type 'give up' to quit:")
     shot = input().split()
 
-    if shot[0].lower() == "give" and shot[1].lower() == "up":
+    if len(shot) == 2 and shot[0].lower() == "give" and shot[1].lower() == "up":
         print(f"\n{player_name} has given up!")
         leaderboard.append((player_name, shots))
         break  
@@ -60,6 +103,8 @@ while True:
         print("You hit a ship!")
         display_field[row][col] = 'X'
         field[row][col] = '.'  
+        if is_ship_sunk(row, col, field, display_field):
+            print("You sank a ship!")
     else:
         print("You missed!")
         display_field[row][col] = 'O'
