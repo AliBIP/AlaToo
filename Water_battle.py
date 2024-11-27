@@ -49,7 +49,6 @@ def is_ship_sunk(row, col, field, display_field):
                     return False  
                 if display_field[nr][nc] == 'X':
                     ship_cells.append((nr, nc))
-
     for r, c in visited:
         display_field[r][c] = 'S'
     return True
@@ -70,6 +69,9 @@ for size in sizes:
             break
 
 shots = 0
+misses = 0  
+max_misses = 5  
+
 while True:
     os.system('cls' if os.name == 'nt' else 'clear')  
     print(f"\n{player_name}'s current field:")
@@ -108,8 +110,19 @@ while True:
     else:
         print("You missed!")
         display_field[row][col] = 'O'
+        misses += 1 
 
     shots += 1
+
+    if misses >= max_misses:
+        os.system('cls' if os.name == 'nt' else 'clear') 
+        print("\nYou lost! You missed too many times.")
+        print(f"It took you {shots} shots.")
+        print("\nFinal field:")
+        for row in display_field:
+            print(" ".join(row))
+        break
+
     if all('S' not in row for row in field):
         os.system('cls' if os.name == 'nt' else 'clear') 
         print("\nCongratulations! You sank all the ships!")
