@@ -78,7 +78,7 @@ while True:
     for row in display_field:
         print(" ".join(row))
 
-    print("\nEnter your shot ( A 4) or type 'give up' to quit:")
+    print("\nEnter your shot ((if you don't find ship 5 try you lose) A 4) or type 'give up' to quit:")
     shot = input().split()
 
     if len(shot) == 2 and shot[0].lower() == "give" and shot[1].lower() == "up":
