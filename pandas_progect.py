@@ -7,7 +7,7 @@ index=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
 print(months)
 
 # 2
-students = {'MatMIE': 45, 'Mat DAIS': 50, 'COMIE': 40, 'COMEC': 55}
+students = {'MatMIE': 30, 'MatDAIS': 34, 'COMIE': 37, 'COMEC': 38}
 students_series = pd.Series(students)
 print(students_series)
 
