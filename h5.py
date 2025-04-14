@@ -9,9 +9,11 @@ scores = np.array([50, 55, 58, 60, 62, 65, 67, 70, 72, 75])
 
 data = pd.DataFrame({'Hours': hours, 'Scores': scores})
 
-
+#intercept
 X = sm.add_constant(data['Hours'])
+ 
 
+#model regression 
 model = sm.OLS(data['Scores'], X).fit()
 
 
@@ -25,3 +27,5 @@ plt.ylabel('Scores')
 plt.legend()
 plt.title('Linear Regression: Hours vs Scores')
 plt.show()
+
+
